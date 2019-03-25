@@ -1,0 +1,8 @@
+{
+    "name": "homedir/bin-scripts",
+    "description": "homedir bin scripts",
+    "type": "executables",
+    "require": {
+        "squizlabs/php_codesniffer": "^3.3"
+    }
+}

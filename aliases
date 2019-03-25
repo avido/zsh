@@ -1,0 +1,66 @@
+get_git_branch() {
+  echo `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
+}
+opengit() {
+    if [ -d .git ]; then
+	###remote=$(git config --get remote.$(git config --get branch.master.remote).url | awk -F'git@github.com:' '{print $2}' | cut -d" " -f1)
+	remote=$(git remote -v | grep origin | awk -F'git@github.com:' '{print $2}' | awk 'NR==1{print $1}' | cut -d" " -f1)
+        remote_url=$(echo $remote)
+        url="https://github.com/"
+        url="${url}${remote_url}"
+        open $url
+    else
+      echo "Not a git repo"
+    fi;
+}
+alias cs='~/Projects/shellscripts/bin/vendor/bin/phpcs -p --standard=PSR2 '
+alias cbf='~/Projects/shellscripts/bin/vendor/bin/phpcbf -p --standard=PSR2 '
+alias restart='php-fpm.restart && nginx.restart'
+alias nginx.start='sudo nginx'
+alias nginx.stop='sudo nginx -s stop'
+alias nginx.restart='nginx.stop && nginx.start'
+alias apache.start='sudo apachectl start'
+alias apache.stop='sudo apachectl stop'
+alias apache.restart='apache.stop && apache.start'
+#alias php-fpm.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.php72.plist"
+#alias php-fpm.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.php72.plist"
+alias php-fpm.restart='php-fpm.stop && php-fpm.start'
+alias mysql.start="launchctl load -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysql.stop="launchctl unload -w ~/Library/LaunchAgents/homebrew.mxcl.mysql.plist"
+alias mysql.restart='mysql.stop && mysql.start'
+alias nginx.logs.error='tail -250f /usr/local/etc/nginx/logs/error.log'
+alias nginx.logs.access='tail -250f /usr/local/etc/nginx/logs/access.log'
+alias nginx.logs.default.access='tail -250f /usr/local/etc/nginx/logs/default.access.log'
+alias nginx.logs.default-ssl.access='tail -250f /usr/local/etc/nginx/logs/default-ssl.access.log'
+alias nginx.logs.phpmyadmin.error='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.error.log'
+alias nginx.logs.phpmyadmin.access='tail -250f /usr/local/etc/nginx/logs/phpmyadmin.access.log'
+alias php56='/usr/local/opt/php56/bin/php'
+# git related
+alias springloops="git push springloops master"
+alias gfetch="git fetch origin"
+alias gpull="git pull origin master"
+alias gitup='gfetch && gpull'
+alias mergeupstream='master && git fetch upstream && git merge upstream/master'
+alias st="git status"
+alias branch="git branch"
+alias gc="git checkout"
+alias master="git checkout master"
+alias rebase="git rebase master"
+alias git.undo="git reset --soft HEAD~1"
+alias gl="git log --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold green)<%an>%Creset' --abbrev-commit --date=relative"
+alias lc="git log ORIG_HEAD.. --no-merges --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
+alias gpush='git fetch origin && git push origin `get_git_branch` && `opengit`'
+alias reloadignore='git rm -r --cached . && git add . && git commit -m "Reloaded gitignore"'
+alias gbdall='git branch | egrep -v "(master|\*)" | xargs git branch -D'
+
+#POSTFIX
+alias postfix.start="sudo rm -rf /var/spool/postfix/maildrop && sudo launchctl load /System/Library/LaunchDaemons/org.postfix.master.plist && sudo postfix start"
+alias postfix.stop="sudo launchctl unload /System/Library/LaunchDaemons/org.postfix.master.plist && sudo postfix stop"
+#MOSQUITTO
+alias mosquitto.start="mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf"
+
+# common
+#alias wget="curl -O"
+#alias fixdirpermission='function _fixDir(){ find $1 -type d -exec chmod 755 {} \;};_fixDir()';
+#alias fixdirpermission="find $1 -type d -exec chmod 755 {}\;"
+#alias fixfilepermission="find $1 -type f -exec chmod 644 {}\;"
