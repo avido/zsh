@@ -13,6 +13,7 @@ opengit() {
       echo "Not a git repo"
     fi;
 }
+alias artisan="php artisan "
 alias cs='~/zsh/bin/vendor/bin/phpcs -p --standard=PSR2 '
 alias cbf='~/zsh/bin/vendor/bin/phpcbf -p --standard=PSR2 '
 alias nginx.start='sudo nginx'
@@ -29,13 +30,16 @@ alias nginx.logs.phpmyadmin.access='tail -250f /usr/local/etc/nginx/logs/phpmyad
 alias springloops="git push springloops master"
 alias gfetch="git fetch origin"
 alias gpull="git pull origin master"
+alias gpulldev="git pull origin develop"
 alias gitup='gfetch && gpull'
+alias gitupdev='gfetch && gpulldev'
 alias mergeupstream='master && git fetch upstream && git merge upstream/master'
 alias st="git status"
 alias branch="git branch"
 alias gc="git checkout"
 alias master="git checkout master"
 alias rebase="git rebase master"
+alias rebasedev="git rebase develop"
 alias git.undo="git reset --soft HEAD~1"
 alias gl="git log --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold green)<%an>%Creset' --abbrev-commit --date=relative"
 alias lc="git log ORIG_HEAD.. --no-merges --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
