@@ -13,6 +13,11 @@ opengit() {
       echo "Not a git repo"
     fi;
 }
+#stupid mac dock
+alias kdock='killall Dock'
+#docker related
+alias dstopall='docker container stop $(docker ps -a -q)'
+alias drm='docker rm $(docker ps -a -q) -f'
 alias artisan="php artisan "
 alias cs='~/zsh/bin/vendor/bin/phpcs -p --standard=PSR2 '
 alias cbf='~/zsh/bin/vendor/bin/phpcbf -p --standard=PSR2 '
