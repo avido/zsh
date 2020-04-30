@@ -4,5 +4,6 @@
     "type": "executables",
     "require": {
         "squizlabs/php_codesniffer": "^3.3"
+        "overtrue/phplint": "^2.0"
     }
 }
