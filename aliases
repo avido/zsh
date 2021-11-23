@@ -63,3 +63,6 @@ alias mosquitto.start="mosquitto -c /usr/local/etc/mosquitto/mosquitto.conf"
 #alias fixdirpermission='function _fixDir(){ find $1 -type d -exec chmod 755 {} \;};_fixDir()';
 #alias fixdirpermission="find $1 -type d -exec chmod 755 {}\;"
 #alias fixfilepermission="find $1 -type f -exec chmod 644 {}\;"
+
+# Laravel Sail
+alias sail='bash vendor/bin/sail'
