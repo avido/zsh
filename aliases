@@ -13,6 +13,9 @@ opengit() {
       echo "Not a git repo"
     fi;
 }
+# Laravel Related
+alias tinker='sail artisan tinker'
+alias a='sail artisan'
 #stupid mac dock
 alias kdock='killall Dock'
 #docker related
@@ -34,7 +37,7 @@ alias nginx.logs.phpmyadmin.access='tail -250f /usr/local/etc/nginx/logs/phpmyad
 # git related
 alias springloops="git push springloops master"
 alias gfetch="git fetch origin"
-alias gpull="git pull origin master"
+alias gpull='git pull origin `get_git_branch`'
 alias gpulldev="git pull origin develop"
 alias gitup='gfetch && gpull'
 alias gitupdev='gfetch && gpulldev'
@@ -50,7 +53,9 @@ alias gl="git log --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%C
 alias lc="git log ORIG_HEAD.. --no-merges --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gpush='git fetch origin && git push origin `get_git_branch` && `opengit`'
 alias reloadignore='git rm -r --cached . && git add . && git commit -m "Reloaded gitignore"'
-alias gbdall='git branch | egrep -v "(master|develop)" | xargs git branch -D'
+alias gbdall='git branch | egrep -v "(master|develop|release-forge)" | xargs git branch -D'
+alias nah="git reset --hard && git clean -df"
+alias wip="git add . && git commit -m 'WIP'"
 
 #POSTFIX
 alias postfix.start="sudo rm -rf /var/spool/postfix/maildrop && sudo launchctl load /System/Library/LaunchDaemons/org.postfix.master.plist && sudo postfix start"
