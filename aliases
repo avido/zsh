@@ -1,3 +1,26 @@
+nah() {
+  # Configuration
+  local cutoff_in_seconds=86400 # 1 day
+
+  # Stash our current changes, including untracked files
+  git stash save -u "<<nah - $(date +%s)>>"
+
+  # Get a list of all stashes that match our message format
+  IFS=$'\n' existing_stashes=($(git stash list | grep "<<nah - [0-9]*>>"))
+
+  # Iterate over stashes and drop stashes older than our cutoff
+  local current_time=$(date +%s)
+  
+  for stash in "${existing_stashes[@]}"; do
+    local stash_name=$(echo $stash | cut -d ":" -f1)
+    local stash_time=$(echo $stash | grep -o "<<nah - [0-9]*>>" | grep -o "[0-9]*")
+
+    if [[ $stash_time =~ ^[0-9]+$ ]] && ((current_time - stash_time > cutoff_in_seconds)) ; then
+      git stash drop $stash_name
+    fi
+  done
+}
+
 get_git_branch() {
   echo `git branch 2> /dev/null | sed -e '/^[^*]/d' -e 's/* \(.*\)/\1/'`
 }
