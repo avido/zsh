@@ -78,7 +78,7 @@ alias gl="git log --graph --pretty=format:'%C(bold red)%h%Creset -%C(yellow)%d%C
 alias lc="git log ORIG_HEAD.. --no-merges --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --date=relative"
 alias gpush='git fetch origin && git push origin `get_git_branch` && `opengit`'
 alias reloadignore='git rm -r --cached . && git add . && git commit -m "Reloaded gitignore"'
-alias gbdall='git branch | egrep -v "^(master|develop|release-forge|releases/)" | xargs git branch -D'
+alias gbdall='git branch | egrep -v "^(master|develop|release-forge|releases/.*)" | xargs git branch -D'
 
 alias nah="git reset --hard && git clean -df"
 alias wip="git add . && git commit -m 'WIP'"
