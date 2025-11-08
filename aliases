@@ -38,6 +38,7 @@ opengit() {
 }
 
 # Laravel Related
+alias sc='sail composer'
 alias tinker='sail artisan tinker'
 alias a='sail artisan'
 #stupid mac dock
