@@ -37,6 +37,9 @@ opengit() {
     fi;
 }
 
+# Claude
+alias clauded="claude --dangerously-skip-permissions"
+
 # Laravel Related
 alias sc='sail composer'
 alias tinker='sail artisan tinker'
